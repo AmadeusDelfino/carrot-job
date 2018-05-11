@@ -1,0 +1,13 @@
+{
+    "name": "amadeusdelfino/carrot-job",
+    "description": "This package aims to develop a Celery in PHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amadeus Delfino",
+            "email": "amadeus.cmd@gmail.com"
+        }
+    ],
+    "require": {}
+}
