@@ -1,0 +1,23 @@
+{
+    "name": "amadeusdelfino/carrot-job",
+    "description": "This package aims to develop a Celery in PHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amadeus Delfino",
+            "email": "amadeus.cmd@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "CarrotJob\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
