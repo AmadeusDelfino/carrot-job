@@ -6,5 +6,5 @@ require __DIR__ . '/../Core/Core.php';
 
 $process = new \CarrotDaemon\Process();
 $core = \CarrotCore\Support\Instances::core();
-;
+
 $process->start($core);

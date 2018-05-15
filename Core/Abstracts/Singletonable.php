@@ -33,5 +33,8 @@ abstract class Singletonable
      * @param $instance
      * @return mixed
      */
-    abstract protected function configure($instance);
+    protected function configure($instance)
+    {
+        return $instance;
+    }
 }
