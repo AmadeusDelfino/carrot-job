@@ -11,13 +11,21 @@ use CarrotCore\Settings\DotEnv;
 class Instances
 {
     /**
+     * @return Bus
+     */
+    public static function bus() : Bus
+    {
+        return Bus::instance();
+    }
+
+    /**
      * Get the Core Singleton class
      * @return Core
      * @throws \CarrotCore\Exceptions\FactoryNotFoundException
      */
-    public static function core()
+    public static function core() : Core
     {
-        return Bus::make('application_core');
+        return self::bus()->make('application_core');
     }
 
     /**
@@ -25,9 +33,9 @@ class Instances
      * @return Bag
      * @throws \CarrotCore\Exceptions\FactoryNotFoundException
      */
-    public static function config()
+    public static function config() : Bag
     {
-        return Bus::make('config');
+        return self::bus()->make('config');
     }
 
     /**
@@ -35,8 +43,8 @@ class Instances
      * @return DotEnv
      * @throws \CarrotCore\Exceptions\FactoryNotFoundException
      */
-    public static function dotEnv()
+    public static function dotEnv() : DotEnv
     {
-        return Bus::make('dotenv');
+        return self::bus()->make('dotenv');
     }
 }

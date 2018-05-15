@@ -19,6 +19,10 @@ class DotEnv extends Singletonable
     protected function configure($instance)
     {
         $instance->envs = new DotenvBase(__DIR__ . '/../../', '.env');
-        $instance->envs->load();
+        try{
+            $instance->envs->load();
+        } catch (\Exception $e) {
+            
+        }
     }
 }

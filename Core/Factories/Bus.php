@@ -24,7 +24,7 @@ class Bus extends Singletonable
      */
     public function make($need, $params = [])
     {
-        self::validate($need);
+        $this->validate($need);
         $class = $this->factories[$need];
 
         return (new $class)($params);
@@ -50,13 +50,21 @@ class Bus extends Singletonable
         }
     }
 
+    /**
+     * @param $instance
+     * @return mixed|void
+     * @throws FactoryNotFoundException
+     */
     protected function configure($instance)
     {
         $this->parseCustomFactories();
     }
 
+    /**
+     * @throws FactoryNotFoundException
+     */
     private function parseCustomFactories()
     {
-        $this->factories = array_merge($this->factories, Instances::config()->get('app.factories'));
+        $this->factories = array_merge($this->factories, Instances::config()->get('app.factories', []));
     }
 }
