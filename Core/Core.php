@@ -2,26 +2,27 @@
 
 namespace CarrotCore;
 
-use CarrotCore\Factories\Bus;
 
-class Core
+use CarrotCore\Abstracts\Singletonable;
+use CarrotCore\Support\Instances;
+
+class Core extends Singletonable
 {
-    protected $settings;
-    protected $dotEnv;
-
-    public function __construct()
+    /**
+     * @param $instance
+     * @throws Exceptions\FactoryNotFoundException
+     */
+    protected function configure($instance)
     {
         $this->warmup();
     }
 
-    public function getSettings()
-    {
-        return $this->settings;
-    }
-
+    /**
+     * Required to load .env
+     * @throws Exceptions\FactoryNotFoundException
+     */
     private function warmup()
     {
-        $this->settings = Bus::make('config');
-        $this->dotEnv = Bus::make('dotEnv');
+        Instances::dotEnv();
     }
 }

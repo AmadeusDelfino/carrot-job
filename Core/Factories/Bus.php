@@ -3,38 +3,60 @@
 namespace CarrotCore\Factories;
 
 
+use CarrotCore\Abstracts\Singletonable;
 use CarrotCore\Exceptions\FactoryNotFoundException;
 use CarrotCore\Interfaces\IFactory;
+use CarrotCore\Support\Instances;
 
-class Bus
+class Bus extends Singletonable
 {
-    protected static $factories = [
+    private $factories = [
         'config' => Config::class,
-        'path' => Path::class,
-        'dotEnv' => DotEnv::class,
+        'dotenv' => DotEnv::class,
+        'application_core' => Core::class,
     ];
-
     /**
-     * @param $need
+     * Get a concrete class from a class constructor
+     * @param string $need
      * @param array $params
      * @return IFactory
      * @throws FactoryNotFoundException
      */
-    public static function make($need, $params = [])
+    public function make($need, $params = [])
     {
         self::validate($need);
-        $factory = new self::$factories[$need];
-        return $factory($params);
+        $class = $this->factories[$need];
+
+        return (new $class)($params);
+    }
+
+    /**
+     * List of all registered factories on the bus
+     * @return array
+     */
+    public function available()
+    {
+        return array_keys($this->factories);
     }
 
     /**
      * @param $need
      * @throws FactoryNotFoundException
      */
-    protected static function validate($need) : void
+    protected function validate($need) : void
     {
-        if(! (isset(self::$factories[$need]))) {
+        if(! (isset($this->factories[$need]))) {
             throw new FactoryNotFoundException();
         }
+    }
+
+    protected function configure($instance)
+    {
+        $this->parseCustomFactories();
+    }
+
+    private function parseCustomFactories()
+    {
+        $this->factories = array_merge($this->factories, Instances::config()->get('app.factories'));
     }
 }

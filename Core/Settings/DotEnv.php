@@ -3,16 +3,22 @@
 namespace CarrotCore\Settings;
 
 
-class DotEnv
+use CarrotCore\Abstracts\Singletonable;
+use Dotenv\Dotenv as DotenvBase;
+
+class DotEnv extends Singletonable
 {
+    /**
+     * @var $envs DotenvBase
+     */
     protected $envs;
 
-    public static function init() : DotEnv
+    /**
+     * @param $instance
+     */
+    protected function configure($instance)
     {
-        $self = new self;
-        $paths = new Paths();
-        $self->envs = new \Dotenv\Dotenv($paths->dotenv, '.env');
-
-        return $self;
+        $instance->envs = new DotenvBase(__DIR__ . '/../../', '.env');
+        $instance->envs->load();
     }
 }
