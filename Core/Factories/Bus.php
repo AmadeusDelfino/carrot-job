@@ -2,7 +2,6 @@
 
 namespace CarrotCore\Factories;
 
-
 use CarrotCore\Abstracts\Singletonable;
 use CarrotCore\Exceptions\FactoryNotFoundException;
 use CarrotCore\Interfaces\IFactory;
@@ -11,27 +10,32 @@ use CarrotCore\Support\Instances;
 class Bus extends Singletonable
 {
     private $factories = [
-        'config' => Config::class,
-        'dotenv' => DotEnv::class,
+        'config'           => Config::class,
+        'dotenv'           => DotEnv::class,
         'application_core' => Core::class,
     ];
+
     /**
-     * Get a concrete class from a class constructor
+     * Get a concrete class from a class constructor.
+     *
      * @param string $need
-     * @param array $params
-     * @return IFactory
+     * @param array  $params
+     *
      * @throws FactoryNotFoundException
+     *
+     * @return IFactory
      */
     public function make($need, $params = [])
     {
         $this->validate($need);
         $class = $this->factories[$need];
 
-        return (new $class)($params);
+        return (new $class())($params);
     }
 
     /**
-     * List of all registered factories on the bus
+     * List of all registered factories on the bus.
+     *
      * @return array
      */
     public function available()
@@ -41,19 +45,22 @@ class Bus extends Singletonable
 
     /**
      * @param $need
+     *
      * @throws FactoryNotFoundException
      */
-    protected function validate($need) : void
+    protected function validate($need): void
     {
-        if(! (isset($this->factories[$need]))) {
+        if (! (isset($this->factories[$need]))) {
             throw new FactoryNotFoundException();
         }
     }
 
     /**
      * @param $instance
-     * @return mixed|void
+     *
      * @throws FactoryNotFoundException
+     *
+     * @return mixed|void
      */
     protected function configure($instance)
     {

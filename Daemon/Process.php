@@ -11,5 +11,6 @@ class Process
     public function start(Core $core)
     {
         $this->core = $core;
+        $core->test();
     }
 }

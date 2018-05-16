@@ -1,33 +1,54 @@
 {
-    "name": "amadeusdelfino/carrot-job",
-    "description": "This package aims to develop a Celery in PHP",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Amadeus Delfino",
-            "email": "amadeus.cmd@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=7.1",
-        "illuminate/config": "^5.6",
-        "vlucas/phpdotenv": "^2.4",
-        "symfony/finder": "^4.0",
-        "react/socket": "^0.8.11"
-    },
-    "autoload": {
-        "psr-4": {
-            "CarrotCore\\": "Core/",
-            "CarrotDaemon\\": "Daemon/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "require-dev": {
-        "symfony/var-dumper": "^4.0"
+  "name": "amadeusdelfino/carrot-job",
+  "description": "This package aims to develop a Celery in PHP",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Amadeus Delfino",
+      "email": "amadeus.cmd@gmail.com"
     }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "illuminate/config": "^5.6",
+    "vlucas/phpdotenv": "^2.4",
+    "symfony/finder": "^4.0",
+    "react/socket": "^0.8.11"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^4.0",
+    "friendsofphp/php-cs-fixer": "^2.11"
+  },
+  "autoload": {
+    "psr-4": {
+      "CarrotCore\\": "Core/",
+      "CarrotDaemon\\": "Daemon/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "cs-fix-core": [
+      "./vendor/bin/php-cs-fixer fix --verbose --config=./.php_cs ./Core"
+    ],
+    "cs-check-core": [
+      "./vendor/bin/php-cs-fixer fix --verbose --config=./.php_cs --dry-run ./Core"
+    ],
+    "cs-fix-config": [
+      "./vendor/bin/php-cs-fixer fix --verbose --config=./.php_cs ./configs"
+    ],
+    "cs-check-config": [
+      "./vendor/bin/php-cs-fixer fix --verbose --config=./.php_cs --dry-run ./configs"
+    ],
+    "cs-fix-tests": [
+      "./vendor/bin/php-cs-fixer fix --verbose --config=./.php_cs ./tests"
+    ],
+    "cs-check-tests": [
+      "./vendor/bin/php-cs-fixer fix --verbose --config=./.php_cs --dry-run ./tests"
+    ]
+  }
 }

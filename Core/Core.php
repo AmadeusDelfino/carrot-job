@@ -2,14 +2,23 @@
 
 namespace CarrotCore;
 
-
 use CarrotCore\Abstracts\Singletonable;
+use CarrotCore\DiscoveryServer\TcpSocket\Socket;
 use CarrotCore\Support\Instances;
 
 class Core extends Singletonable
 {
+    public function test()
+    {
+        $socket = new Socket();
+        $socket
+            ->init()
+            ->run();
+    }
+
     /**
      * @param $instance
+     *
      * @throws Exceptions\FactoryNotFoundException
      */
     protected function configure($instance)
@@ -18,7 +27,8 @@ class Core extends Singletonable
     }
 
     /**
-     * Required to load .env
+     * Required to load .env.
+     *
      * @throws Exceptions\FactoryNotFoundException
      */
     private function warmup()

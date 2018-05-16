@@ -11,19 +11,49 @@ class Repository extends ConfigBaseRepository
 
     /**
      * Bag constructor.
+     *
      * @param array $items
      */
     public function __construct(array $items = [])
     {
         parent::__construct($items);
-        $this->loadConfigurationFiles(__DIR__ . '/../../configs');
+        $this->loadConfigurationFiles(__DIR__.'/../../configs');
+    }
+
+    /**
+     * Get the configuration files for the selected environment.
+     *
+     * @param null|string $environment
+     *
+     * @return array
+     */
+    protected function getConfigurationFiles($environment = null)
+    {
+        $path = $this->configPath;
+
+        if ($environment) {
+            $path .= '/'.$environment;
+        }
+
+        if (! is_dir($path)) {
+            return [];
+        }
+
+        $files = [];
+        $phpFiles = Finder::create()->files()->name('*.php')->in($path)->depth(0);
+
+        foreach ($phpFiles as $file) {
+            $files[basename($file->getRealPath(), '.php')] = $file->getRealPath();
+        }
+
+        return $files;
     }
 
     /**
      * Load the configuration items from all of the files.
      *
-     * @param string $path
-     * @param string|null $environment
+     * @param string      $path
+     * @param null|string $environment
      */
     private function loadConfigurationFiles($path, $environment = null)
     {
@@ -40,34 +70,5 @@ class Repository extends ConfigBaseRepository
                 $this->set($fileKey.'.'.$envKey, $value);
             }
         }
-    }
-
-    /**
-     * Get the configuration files for the selected environment
-     *
-     * @param string|null $environment
-     *
-     * @return array
-     */
-    protected function getConfigurationFiles($environment = null)
-    {
-        $path = $this->configPath;
-
-        if ($environment) {
-            $path .= '/' . $environment;
-        }
-
-        if (!is_dir($path)) {
-            return [];
-        }
-
-        $files = [];
-        $phpFiles = Finder::create()->files()->name('*.php')->in($path)->depth(0);
-
-        foreach ($phpFiles as $file) {
-            $files[basename($file->getRealPath(), '.php')] = $file->getRealPath();
-        }
-
-        return $files;
     }
 }

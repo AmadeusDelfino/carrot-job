@@ -2,7 +2,6 @@
 
 namespace CarrotCore\DiscoveryServer\TcpSocket;
 
-
 use CarrotCore\Abstracts\Socketable;
 use CarrotCore\Interfaces\ISocket;
 use CarrotCore\Support\Instances;
