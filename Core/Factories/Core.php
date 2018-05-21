@@ -1,8 +1,6 @@
 <?php
 
-
 namespace CarrotCore\Factories;
-
 
 use CarrotCore\Core as CoreClass;
 use CarrotCore\Interfaces\IFactory;

@@ -11,18 +11,19 @@ class Repository extends ConfigBaseRepository
 
     /**
      * Bag constructor.
+     *
      * @param array $items
      */
     public function __construct(array $items = [])
     {
         parent::__construct($items);
-        $this->loadConfigurationFiles(__DIR__ . '/../../configs');
+        $this->loadConfigurationFiles(__DIR__.'/../../configs');
     }
 
     /**
      * Load the configuration items from all of the files.
      *
-     * @param string $path
+     * @param string      $path
      * @param string|null $environment
      */
     private function loadConfigurationFiles($path, $environment = null)
@@ -43,7 +44,7 @@ class Repository extends ConfigBaseRepository
     }
 
     /**
-     * Get the configuration files for the selected environment
+     * Get the configuration files for the selected environment.
      *
      * @param string|null $environment
      *
@@ -54,7 +55,7 @@ class Repository extends ConfigBaseRepository
         $path = $this->configPath;
 
         if ($environment) {
-            $path .= '/' . $environment;
+            $path .= '/'.$environment;
         }
 
         if (!is_dir($path)) {

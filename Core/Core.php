@@ -2,7 +2,6 @@
 
 namespace CarrotCore;
 
-
 use CarrotCore\Abstracts\Singletonable;
 use CarrotCore\Support\Instances;
 
@@ -10,6 +9,7 @@ class Core extends Singletonable
 {
     /**
      * @param $instance
+     *
      * @throws Exceptions\FactoryNotFoundException
      */
     protected function configure($instance)
@@ -18,7 +18,8 @@ class Core extends Singletonable
     }
 
     /**
-     * Required to load .env
+     * Required to load .env.
+     *
      * @throws Exceptions\FactoryNotFoundException
      */
     private function warmup()
