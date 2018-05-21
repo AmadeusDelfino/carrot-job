@@ -15,8 +15,10 @@ class Bag extends Singletonable
     }
 
     /**
-     * Get a property described in your configuration files
+     * Get a property described in your configuration files.
+     *
      * @param $value
+     *
      * @return mixed
      */
     public function get($value)
@@ -25,9 +27,11 @@ class Bag extends Singletonable
     }
 
     /**
-     * Defines a property overwriting the configuration file or creating a new entry
+     * Defines a property overwriting the configuration file or creating a new entry.
+     *
      * @param $key
      * @param $value
+     *
      * @return Bag
      */
     public function set($key, $value)
@@ -37,9 +41,9 @@ class Bag extends Singletonable
         return $this;
     }
 
-
     /**
-     * Get all settings loaded
+     * Get all settings loaded.
+     *
      * @return array
      */
     public function all()
